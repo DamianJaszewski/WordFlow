@@ -26,33 +26,33 @@ frontendweb-build/
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 # User-specific files
-/backend/*.rsuser
-/backend/*.suo
-/backend/*.user
-/backend/*.userosscache
-/backend/*.sln.docstates
+/backend/GotIt-back/*.rsuser
+/backend/GotIt-back/*.suo
+/backend/GotIt-back/*.user
+/backend/GotIt-back/*.userosscache
+/backend/GotIt-back/*.sln.docstates
 
 # User-specific files (MonoDevelop/Xamarin Studio)
-/backend/*.userprefs
+/backend/GotIt-back/*.userprefs
 
 # Mono auto generated files
-/backend/mono_crash.*
+/backend/GotIt-back/mono_crash.*
 
 # Build results
-/backend/[Dd]ebug/
-/backend/[Dd]ebugPublic/
-/backend/[Rr]elease/
-/backend/[Rr]eleases/
-/backend/x64/
-/backend/x86/
-/backend/[Ww][Ii][Nn]32/
-/backend/[Aa][Rr][Mm]/
-/backend/[Aa][Rr][Mm]64/
-/backend/bld/
-/backend/[Bb]in/
-/backend/[Oo]bj/
-/backend/[Ll]og/
-/backend/[Ll]ogs/
+/backend/GotIt-back/[Dd]ebug/
+/backend/GotIt-back/[Dd]ebugPublic/
+/backend/GotIt-back/[Rr]elease/
+/backend/GotIt-back/[Rr]eleases/
+/backend/GotIt-back/x64/
+/backend/GotIt-back/x86/
+/backend/GotIt-back/[Ww][Ii][Nn]32/
+/backend/GotIt-back/[Aa][Rr][Mm]/
+/backend/GotIt-back/[Aa][Rr][Mm]64/
+/backend/GotIt-back/bld/
+/backend/GotIt-back/[Bb]in/
+/backend/GotIt-back/[Oo]bj/
+/backend/GotIt-back/[Ll]og/
+/backend/GotIt-back/[Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
 /backend/.vs/
@@ -60,207 +60,207 @@ frontendweb-build/
 #wwwroot/
 
 # Visual Studio 2017 auto generated files
-/backend/Generated\ Files/
+/backend/GotIt-back/Generated\ Files/
 
 # MSTest test Results
-/backend/[Tt]est[Rr]esult*/
-/backend/[Bb]uild[Ll]og.*
+/backend/GotIt-back/[Tt]est[Rr]esult*/
+/backend/GotIt-back/[Bb]uild[Ll]og.*
 
 # NUnit
-/backend/*.VisualState.xml
-/backend/TestResult.xml
-/backend/nunit-*.xml
+/backend/GotIt-back/*.VisualState.xml
+/backend/GotIt-back/TestResult.xml
+/backend/GotIt-back/nunit-*.xml
 
 # Build Results of an ATL Project
-/backend/[Dd]ebugPS/
-/backend/[Rr]eleasePS/
-/backend/dlldata.c
+/backend/GotIt-back/[Dd]ebugPS/
+/backend/GotIt-back/[Rr]eleasePS/
+/backend/GotIt-back/dlldata.c
 
 # Benchmark Results
-/backend/BenchmarkDotNet.Artifacts/
+/backend/GotIt-back/BenchmarkDotNet.Artifacts/
 
 # .NET Core
-/backend/project.lock.json
-/backend/project.fragment.lock.json
-/backend/artifacts/
+/backend/GotIt-back/project.lock.json
+/backend/GotIt-back/project.fragment.lock.json
+/backend/GotIt-back/artifacts/
 
 # ASP.NET Scaffolding
-/backend/ScaffoldingReadMe.txt
+/backend/GotIt-back/ScaffoldingReadMe.txt
 
 # StyleCop
-/backend/StyleCopReport.xml
+/backend/GotIt-back/StyleCopReport.xml
 
 # Files built by Visual Studio
-/backend/*_i.c
-/backend/*_p.c
-/backend/*_h.h
-/backend/*.ilk
-/backend/*.meta
-/backend/*.obj
-/backend/*.iobj
-/backend/*.pch
-/backend/*.pdb
-/backend/*.ipdb
-/backend/*.pgc
-/backend/*.pgd
-/backend/*.rsp
-/backend/*.sbr
-/backend/*.tlb
-/backend/*.tli
-/backend/*.tlh
-/backend/*.tmp
-/backend/*.tmp_proj
-/backend/*_wpftmp.csproj
-/backend/*.log
-/backend/*.tlog
-/backend/*.vspscc
-/backend/*.vssscc
-/backend/.builds
-/backend/*.pidb
-/backend/*.svclog
-/backend/*.scc
+/backend/GotIt-back/*_i.c
+/backend/GotIt-back/*_p.c
+/backend/GotIt-back/*_h.h
+/backend/GotIt-back/*.ilk
+/backend/GotIt-back/*.meta
+/backend/GotIt-back/*.obj
+/backend/GotIt-back/*.iobj
+/backend/GotIt-back/*.pch
+/backend/GotIt-back/*.pdb
+/backend/GotIt-back/*.ipdb
+/backend/GotIt-back/*.pgc
+/backend/GotIt-back/*.pgd
+/backend/GotIt-back/*.rsp
+/backend/GotIt-back/*.sbr
+/backend/GotIt-back/*.tlb
+/backend/GotIt-back/*.tli
+/backend/GotIt-back/*.tlh
+/backend/GotIt-back/*.tmp
+/backend/GotIt-back/*.tmp_proj
+/backend/GotIt-back/*_wpftmp.csproj
+/backend/GotIt-back/*.log
+/backend/GotIt-back/*.tlog
+/backend/GotIt-back/*.vspscc
+/backend/GotIt-back/*.vssscc
+/backend/GotIt-back/.builds
+/backend/GotIt-back/*.pidb
+/backend/GotIt-back/*.svclog
+/backend/GotIt-back/*.scc
 
 # Chutzpah Test files
-/backend/_Chutzpah*
+/backend/GotIt-back/_Chutzpah*
 
 # Visual C++ cache files
-/backend/ipch/
-/backend/*.aps
-/backend/*.ncb
-/backend/*.opendb
-/backend/*.opensdf
-/backend/*.sdf
-/backend/*.cachefile
-/backend/*.VC.db
-/backend/*.VC.VC.opendb
+/backend/GotIt-back/ipch/
+/backend/GotIt-back/*.aps
+/backend/GotIt-back/*.ncb
+/backend/GotIt-back/*.opendb
+/backend/GotIt-back/*.opensdf
+/backend/GotIt-back/*.sdf
+/backend/GotIt-back/*.cachefile
+/backend/GotIt-back/*.VC.db
+/backend/GotIt-back/*.VC.VC.opendb
 
 # Visual Studio profiler
-/backend/*.psess
-/backend/*.vsp
-/backend/*.vspx
-/backend/*.sap
+/backend/GotIt-back/*.psess
+/backend/GotIt-back/*.vsp
+/backend/GotIt-back/*.vspx
+/backend/GotIt-back/*.sap
 
 # Visual Studio Trace Files
-/backend/*.e2e
+/backend/GotIt-back/*.e2e
 
 # TFS 2012 Local Workspace
-/backend/$tf/
+/backend/GotIt-back/$tf/
 
 # Guidance Automation Toolkit
-/backend/*.gpState
+/backend/GotIt-back/*.gpState
 
 # ReSharper is a .NET coding add-in
-/backend/_ReSharper*/
-/backend/*.[Rr]e[Ss]harper
-/backend/*.DotSettings.user
+/backend/GotIt-back/_ReSharper*/
+/backend/GotIt-back/*.[Rr]e[Ss]harper
+/backend/GotIt-back/*.DotSettings.user
 
 # TeamCity is a build add-in
-/backend/_TeamCity*
+/backend/GotIt-back/_TeamCity*
 
 # DotCover is a Code Coverage Tool
-/backend/*.dotCover
+/backend/GotIt-back/*.dotCover
 
 # AxoCover is a Code Coverage Tool
-/backend/.axoCover/*
-/backend/!.axoCover/settings.json
+/backend/GotIt-back/.axoCover/*
+/backend/GotIt-back/!.axoCover/settings.json
 
 # Coverlet is a free, cross platform Code Coverage Tool
-/backend/coverage*.json
-/backend/coverage*.xml
-/backend/coverage*.info
+/backend/GotIt-back/coverage*.json
+/backend/GotIt-back/coverage*.xml
+/backend/GotIt-back/coverage*.info
 
 # Visual Studio code coverage results
-/backend/*.coverage
-/backend/*.coveragexml
+/backend/GotIt-back/*.coverage
+/backend/GotIt-back/*.coveragexml
 
 # NCrunch
-/backend/_NCrunch_*
-/backend/.*crunch*.local.xml
-/backend/nCrunchTemp_*
+/backend/GotIt-back/_NCrunch_*
+/backend/GotIt-back/.*crunch*.local.xml
+/backend/GotIt-back/nCrunchTemp_*
 
 # MightyMoose
-/backend/*.mm.*
-/backend/AutoTest.Net/
+/backend/GotIt-back/*.mm.*
+/backend/GotIt-back/AutoTest.Net/
 
 # Web workbench (sass)
-/backend/.sass-cache/
+/backend/GotIt-back/.sass-cache/
 
 # Installshield output folder
-/backend/[Ee]xpress/
+/backend/GotIt-back/[Ee]xpress/
 
 # DocProject is a documentation generator add-in
-/backend/DocProject/buildhelp/
-/backend/DocProject/Help/*.HxT
-/backend/DocProject/Help/*.HxC
-/backend/DocProject/Help/*.hhc
-/backend/DocProject/Help/*.hhk
-/backend/DocProject/Help/*.hhp
-/backend/DocProject/Help/Html2
-/backend/DocProject/Help/html
+/backend/GotIt-back/DocProject/buildhelp/
+/backend/GotIt-back/DocProject/Help/*.HxT
+/backend/GotIt-back/DocProject/Help/*.HxC
+/backend/GotIt-back/DocProject/Help/*.hhc
+/backend/GotIt-back/DocProject/Help/*.hhk
+/backend/GotIt-back/DocProject/Help/*.hhp
+/backend/GotIt-back/DocProject/Help/Html2
+/backend/GotIt-back/DocProject/Help/html
 
 # Click-Once directory
-/backend/publish/
+/backend/GotIt-back/publish/
 
 # Publish Web Output
-/backend/*.[Pp]ublish.xml
-/backend/*.azurePubxml
+/backend/GotIt-back/*.[Pp]ublish.xml
+/backend/GotIt-back/*.azurePubxml
 # Note: Comment the next line if you want to checkin your web deploy settings,
 # but database connection strings (with potential passwords) will be unencrypted
-/backend/*.pubxml
-/backend/*.publishproj
+/backend/GotIt-back/*.pubxml
+/backend/GotIt-back/*.publishproj
 
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
 # checkin your Azure Web App publish settings, but sensitive information contained
 # in these scripts will be unencrypted
-/backend/PublishScripts/
+/backend/GotIt-back/PublishScripts/
 
 # NuGet Packages
-/backend/*.nupkg
+/backend/GotIt-back/*.nupkg
 # NuGet Symbol Packages
-/backend/*.snupkg
+/backend/GotIt-back/*.snupkg
 # The packages folder can be ignored because of Package Restore
-/backend/**/[Pp]ackages/*
+/backend/GotIt-back/**/[Pp]ackages/*
 # except build/, which is used as an MSBuild target.
-!/backend/**/[Pp]ackages/build/
+!/backend/GotIt-back/**/[Pp]ackages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/[Pp]ackages/repositories.config
 # NuGet v3's project.json files produces more ignorable files
-/backend/*.nuget.props
-/backend/*.nuget.targets
+/backend/GotIt-back/*.nuget.props
+/backend/GotIt-back/*.nuget.targets
 
 # Microsoft Azure Build Output
-/backend/csx/
-/backend/*.build.csdef
+/backend/GotIt-back/csx/
+/backend/GotIt-back/*.build.csdef
 
 # Microsoft Azure Emulator
-/backend/ecf/
-/backend/rcf/
+/backend/GotIt-back/ecf/
+/backend/GotIt-back/rcf/
 
 # Windows Store app package directories and files
-/backend/AppPackages/
-/backend/BundleArtifacts/
-/backend/Package.StoreAssociation.xml
-/backend/_pkginfo.txt
-/backend/*.appx
-/backend/*.appxbundle
-/backend/*.appxupload
+/backend/GotIt-back/AppPackages/
+/backend/GotIt-back/BundleArtifacts/
+/backend/GotIt-back/Package.StoreAssociation.xml
+/backend/GotIt-back/_pkginfo.txt
+/backend/GotIt-back/*.appx
+/backend/GotIt-back/*.appxbundle
+/backend/GotIt-back/*.appxupload
 
 # Visual Studio cache files
 # files ending in .cache can be ignored
-/backend/*.[Cc]ache
+/backend/GotIt-back/*.[Cc]ache
 # but keep track of directories ending in .cache
-!?/backend/*.[Cc]ache/
+!?/backend/GotIt-back/*.[Cc]ache/
 
 # Others
-/backend/ClientBin/
-/backend/~$*
-/backend/*~
-/backend/*.dbmdl
-/backend/*.dbproj.schemaview
-/backend/*.jfm
-/backend/*.pfx
-/backend/*.publishsettings
-/backend/orleans.codegen.cs
+/backend/GotIt-back/ClientBin/
+/backend/GotIt-back/~$*
+/backend/GotIt-back/*~
+/backend/GotIt-back/*.dbmdl
+/backend/GotIt-back/*.dbproj.schemaview
+/backend/GotIt-back/*.jfm
+/backend/GotIt-back/*.pfx
+/backend/GotIt-back/*.publishsettings
+/backend/GotIt-back/orleans.codegen.cs
 
 # Including strong name files can present a security risk
 # (https://github.com/github/gitignore/pull/2483#issue-259490424)
