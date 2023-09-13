@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public int CardId { get; set; }
         public DateTime LastUpdateTime { get; set; }
+        public DateTime NextRepeatTime { get; set; }
         public bool Result { get; set; }
         public int RepetLevel { get; set; }
 

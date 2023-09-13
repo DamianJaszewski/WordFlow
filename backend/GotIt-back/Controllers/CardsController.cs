@@ -29,7 +29,11 @@ namespace GotIt_back.Controllers
         [HttpGet("Random")]
         public async Task<ActionResult<Card>> GetRandom()
         {
-            var cards = await _dataContext.Cards.Include(x => x.Repeats).ToListAsync();
+            var cards = await _dataContext.Cards
+                .Include(x => x.Repeats)
+                .ToListAsync();
+
+            cards = cards.Where(x => !x.Repeats.Any(r => r.NextRepeatTime > DateTime.UtcNow)).ToList();
 
             //var card = cards.OrderBy(c => c.Repeat == null || c.Repeat.Count == 0 ? c.CreateDate : c.Repeat.Max(r => r.LastUpdateTime));
 
@@ -108,9 +112,14 @@ namespace GotIt_back.Controllers
 
                 if (lastCard.RepetLevel == null) lastCard.RepetLevel = 0;
 
+                int[] repetitionList = { 1, 7, 30, 180, 360 };
+                int repetitionDays = repetitionList[(lastCard.RepetLevel++)];
+                var repetitionDate = DateTime.Now.AddDays(repetitionDays);
+
                 card.Repeats.Add(new Repeat
                 {
                     LastUpdateTime = DateTime.Now,
+                    NextRepeatTime = repetitionDate,
                     Result = true,
                     RepetLevel = lastCard.RepetLevel++
                 });
@@ -120,6 +129,7 @@ namespace GotIt_back.Controllers
                 card.Repeats.Add(new Repeat
                 {
                     LastUpdateTime = DateTime.Now,
+                    NextRepeatTime = DateTime.Now,
                     Result = true,
                     RepetLevel = 0
                 });
