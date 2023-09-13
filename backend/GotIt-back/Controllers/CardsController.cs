@@ -89,7 +89,10 @@ namespace GotIt_back.Controllers
         [HttpPut("Repeat/{id}")]
         public async Task<ActionResult<List<Card>>> UpdateRepatOfCard(int id)
         {
-            var card = await _dataContext.Cards.FindAsync(id);
+            var card = await _dataContext.Cards
+                .Include(x => x.Repeats)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
             if (card == null) return BadRequest("Card not found");
 
             if(card.Repeats == null)
@@ -97,11 +100,30 @@ namespace GotIt_back.Controllers
                 card.Repeats = new List<Repeat>();
             }
 
-            card.Repeats.Add(new Repeat
+            //add Repeat with new RepeatLevel
+
+            if (card.Repeats.Count > 0)
             {
-                LastUpdateTime = DateTime.Now,
-                Result = true
-            });
+                var lastCard = card.Repeats.OrderBy(x => x.Id).FirstOrDefault();
+
+                if (lastCard.RepetLevel == null) lastCard.RepetLevel = 0;
+
+                card.Repeats.Add(new Repeat
+                {
+                    LastUpdateTime = DateTime.Now,
+                    Result = true,
+                    RepetLevel = lastCard.RepetLevel++
+                });
+            }
+            else
+            {
+                card.Repeats.Add(new Repeat
+                {
+                    LastUpdateTime = DateTime.Now,
+                    Result = true,
+                    RepetLevel = 0
+                });
+            }
 
             _dataContext.Update(card);
             await _dataContext.SaveChangesAsync();

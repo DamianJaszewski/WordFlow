@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "p9wES4enqREuujv6ePPFXYeoiC5A2GVKupdOt8pKtwMmLsKprqC8x2reptB5KrnlSGXXcw+eQV2r34kH+Y+M4A==",
+  "dgSpecHash": "JJT+NKcr4zBZ3Y1n3fF12StKo3+baWOIxZWlUvEEgzvO8X9LgB7hMMKIy59CNuNHWqHrUMm0NOV582a7xXkjYw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\oke\\source\\repos\\GotIt-back\\GotIt-back\\GotIt-back.csproj",
+  "projectFilePath": "C:\\Users\\oke\\source\\repos\\WordFlow\\backend\\GotIt-back\\GotIt-back.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\oke\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\oke\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

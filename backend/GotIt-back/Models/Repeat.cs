@@ -6,6 +6,7 @@
         public int CardId { get; set; }
         public DateTime LastUpdateTime { get; set; }
         public bool Result { get; set; }
+        public int RepetLevel { get; set; }
 
         public virtual Card Card { get; set; }
     }

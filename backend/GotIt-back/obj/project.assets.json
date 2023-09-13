@@ -10824,11 +10824,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\oke\\source\\repos\\GotIt-back\\GotIt-back\\GotIt-back.csproj",
+      "projectUniqueName": "C:\\Users\\oke\\source\\repos\\WordFlow\\backend\\GotIt-back\\GotIt-back.csproj",
       "projectName": "GotIt-back",
-      "projectPath": "C:\\Users\\oke\\source\\repos\\GotIt-back\\GotIt-back\\GotIt-back.csproj",
+      "projectPath": "C:\\Users\\oke\\source\\repos\\WordFlow\\backend\\GotIt-back\\GotIt-back.csproj",
       "packagesPath": "C:\\Users\\oke\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\oke\\source\\repos\\GotIt-back\\GotIt-back\\obj\\",
+      "outputPath": "C:\\Users\\oke\\source\\repos\\WordFlow\\backend\\GotIt-back\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
