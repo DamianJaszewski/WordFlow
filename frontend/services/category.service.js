@@ -5,13 +5,9 @@ const getAll = () =>{
 };
 
 const create = data => {
-    http.post("/Cards", {
+    http.post("/Categories", {
         "id": 0,
-        "createDate": null,
-        "question":  data.question,
-        "answer": data.answer,
-        "remembered": false,
-        "categoryId": data.categoryId 
+        "name": data.name
     });
 };
 
@@ -37,6 +33,7 @@ return http.delete(`/Cards/${id}`);
 
 const CategoryService = {
     getAll,
+    create
     // get,
     // create,
     // update,

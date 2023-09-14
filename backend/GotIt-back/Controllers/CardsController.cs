@@ -35,18 +35,18 @@ namespace GotIt_back.Controllers
 
             cards = cards.Where(x => !x.Repeats.Any(r => r.NextRepeatTime > DateTime.UtcNow)).ToList();
 
-            //var card = cards.OrderBy(c => c.Repeat == null || c.Repeat.Count == 0 ? c.CreateDate : c.Repeat.Max(r => r.LastUpdateTime));
-
             cards = cards.OrderBy(c =>
             {
                 if (c.Repeats == null || c.Repeats.Count == 0)
                 {
-                    return c.CreateDate; // Sortowanie po dacie utworzenia, jeśli brak powtórzeń
+                    //Sort at create date, if there is no Repeats
+                    return c.CreateDate;
                 }
                 else
                 {
-                    var lastUpdate = c.Repeats.Max(r => r.LastUpdateTime); // Pobranie ostatniej daty z powtórzeń
-                    return lastUpdate; // Sortowanie po ostatniej dacie powtórzenia
+                    //Sort after last Repeat
+                    var lastUpdate = c.Repeats.Max(r => r.LastUpdateTime);
+                    return lastUpdate;
                 }
             }).ToList();
 
@@ -105,7 +105,6 @@ namespace GotIt_back.Controllers
             }
 
             //add Repeat with new RepeatLevel
-
             if (card.Repeats.Count > 0)
             {
                 var lastCard = card.Repeats.OrderBy(x => x.Id).FirstOrDefault();

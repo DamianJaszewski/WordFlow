@@ -12,6 +12,7 @@ export default function App() {
   const [showAnswer, setShowAnswer] = useState(false)
   const [newCard, setNewCard] = useState({question: '', answer: '', categoryId: 1});
   const [categories, setCategories] = useState([]);
+  const [newCategory, setNewCategory] = useState({name: ''});
   const [selectedCatValue, setSelectedCatValue] = useState("Category..");
 
   useEffect(() => {
@@ -49,10 +50,16 @@ export default function App() {
   const createCard = async() => {
     try{
       await CardsService.create(newCard)
-      console.log(newCard.question);
-      console.log(newCard.answer);
-      console.log(newCard.categoryId);
       setNewCard({ answer: "", question: "" })
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
+  const createCategory = async() => {
+    try{
+      await CategoryService.create(newCategory)
+      setNewCategory({ name: "" })
     } catch (error) {
       setError(error.message);
     }
@@ -85,6 +92,12 @@ export default function App() {
       ))} */}
       {/* Dorzucę tutaj opcje dodawania karty */}
 
+      <TextInput
+        placeholder="Dodaj kategorię"
+        value={newCategory.name}
+        onChangeText={text => setNewCategory({name: text })}
+      />
+      <Button title="Dodaj" onPress={createCategory}/>
       <Picker
         selectedValue={selectedCatValue}
         onValueChange={(itemValue) => {
