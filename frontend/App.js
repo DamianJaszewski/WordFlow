@@ -6,11 +6,14 @@ import CategoryService from './services/category.service';
 
 export default function App() {
 
-  const [cards, setCards] = useState([]);
+  // const [cards, setCards] = useState([]);
+  // const getAllResponse = await CardsService.getAll();
+  // setCards(getAllResponse.data);
+
   const [nextCard, setNextCard] = useState();
   const [error, setError] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false)
-  const [newCard, setNewCard] = useState({question: '', answer: '', categoryId: 1});
+  const [newCard, setNewCard] = useState({id: 0 , question: '', answer: '', categoryId: 0});
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState({name: ''});
   const [selectedCatValue, setSelectedCatValue] = useState("Category..");
@@ -21,10 +24,9 @@ export default function App() {
 
   const fetchData = async () => {
     try {
-      const getAllResponse = await CardsService.getAll();
+      debugger;
       const getAllCategories = await CategoryService.getAll();
       const getNextResponse = await CardsService.getNext();
-      setCards(getAllResponse.data);
       setNextCard(getNextResponse.data);
       setCategories(getAllCategories.data);
     } catch (error) {
@@ -51,6 +53,16 @@ export default function App() {
     try{
       await CardsService.create(newCard)
       setNewCard({ answer: "", question: "" })
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
+  const editCard = async() => {
+    try{
+      const updatedCard = { ...newCard, id: nextCard.id, categoryId: nextCard.categoryId }; 
+      await CardsService.update(updatedCard);
+      setNewCard({ id: 0, question: '', answer: '', categoryId: 0 });
     } catch (error) {
       setError(error.message);
     }
@@ -98,6 +110,7 @@ export default function App() {
         onChangeText={text => setNewCategory({name: text })}
       />
       <Button title="Dodaj" onPress={createCategory}/>
+
       <Picker
         selectedValue={selectedCatValue}
         onValueChange={(itemValue) => {
@@ -121,6 +134,7 @@ export default function App() {
         onChangeText={text => setNewCard({ ...newCard, answer: text })}
       />
       <Button title="Dodaj" onPress={createCard}/>
+      <Button title="Edytuj" onPress={editCard}/>
       <StatusBar style="auto" />
     </View>
   );

@@ -78,11 +78,15 @@ namespace GotIt_back.Controllers
         }
 
         // PUT api/<CardsController>/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult<List<Card>>> UpdateCard(int id, Card request)
+        [HttpPut]
+        public async Task<ActionResult<List<Card>>> UpdateCard(Card request)
         {
-            var card = await _dataContext.Cards.FindAsync(id);
+            var card = await _dataContext.Cards.FindAsync(request.Id);
             if (card == null) return BadRequest("Card not found");
+
+            card.Answer = request.Answer;
+            card.Question = request.Question;
+            card.CategoryId = request.CategoryId;
 
             _dataContext.Update(card);
             await _dataContext.SaveChangesAsync();

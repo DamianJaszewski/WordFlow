@@ -23,8 +23,13 @@ const getNext = () => {
     return http.get(`/Cards/Random/`);
 };
 
-const update = (id, data) => {
-    return http.put(`/Cards/${id}`, data);
+const update = (data) => {
+    return http.put(`/Cards`, {
+        "id": data.id,
+        "question":  data.question,
+        "answer": data.answer,
+        "categoryId": data.categoryId,
+    });
 };
 
 const addRepeatInfo = (id) => {
