@@ -24,7 +24,6 @@ export default function App() {
 
   const fetchData = async () => {
     try {
-      debugger;
       const getAllCategories = await CategoryService.getAll();
       const getNextResponse = await CardsService.getNext();
       setNextCard(getNextResponse.data);
@@ -68,6 +67,15 @@ export default function App() {
     }
   }
 
+  
+  const deleteCard = async() => {
+    try{
+      await CardsService.remove(nextCard.id);
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
   const createCategory = async() => {
     try{
       await CategoryService.create(newCategory)
@@ -83,10 +91,10 @@ export default function App() {
         <Text style={styles.categoryName}>Losowa karta</Text>
         {nextCard && 
          <>
-            <div style={styles.card}><Text style={styles.cardText}>Pytanie: {nextCard.question}</Text></div>
+            <div style={styles.card}><Text style={styles.cardText}>{nextCard.question}</Text></div>
             {(showAnswer === true) ?
             <>
-              <div style={styles.card}><Text style={styles.cardText}>Odpowiedź: {nextCard.answer}</Text></div>
+              <div style={styles.card}><Text style={styles.cardText}>{nextCard.answer}</Text></div>
               <Button title="Next" onPress = {getNextCard}/>
             </>
             : <Button title="Check" onPress={checkAnswer}/>}
@@ -135,6 +143,7 @@ export default function App() {
       />
       <Button title="Dodaj" onPress={createCard}/>
       <Button title="Edytuj" onPress={editCard}/>
+      <Button title="Usuń" onPress={deleteCard}/>
       <StatusBar style="auto" />
     </View>
   );
