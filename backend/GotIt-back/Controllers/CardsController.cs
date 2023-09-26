@@ -102,49 +102,17 @@ namespace GotIt_back.Controllers
         [HttpPut("Repeat/{id}")]
         public async Task<ActionResult<List<Card>>> UpdateRepatOfCard(int id)
         {
-            var card = await _dataContext.Cards
-                .Include(x => x.Repeats)
-                .FirstOrDefaultAsync(x => x.Id == id);
+            var card = await _cardService.GetCardByIdAsync(id);
 
             if (card == null) return BadRequest("Card not found");
 
-            if(card.Repeats == null)
-            {
-                card.Repeats = new List<Repeat>();
-            }
+            _cardService.EnsureRepeatsListExists(card);
 
-            //add Repeat with new RepeatLevel
-            if (card.Repeats.Count > 0)
-            {
-                var lastCard = card.Repeats.OrderBy(x => x.Id).FirstOrDefault();
+            var lastRepeat = _cardService.GetLastRepeat(card);
 
-                if (lastCard.RepetLevel == null) lastCard.RepetLevel = 0;
+            _cardService.UpdateCardRepeats(card, lastRepeat);
 
-                int[] repetitionList = { 1, 7, 30, 180, 360 };
-                int repetitionDays = repetitionList[(lastCard.RepetLevel++)];
-                var repetitionDate = DateTime.Now.AddDays(repetitionDays);
-
-                card.Repeats.Add(new Repeat
-                {
-                    LastUpdateTime = DateTime.Now,
-                    NextRepeatTime = repetitionDate,
-                    Result = true,
-                    RepetLevel = lastCard.RepetLevel++
-                });
-            }
-            else
-            {
-                card.Repeats.Add(new Repeat
-                {
-                    LastUpdateTime = DateTime.Now,
-                    NextRepeatTime = DateTime.Now,
-                    Result = true,
-                    RepetLevel = 0
-                });
-            }
-
-            _dataContext.Update(card);
-            await _dataContext.SaveChangesAsync();
+            await _cardService.SaveChangesAsync();
 
             return Ok();
         }

@@ -21,11 +21,17 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddDefaultTokenProviders();
 
 //Add Authorize to all Controllers
-builder.Services.AddControllers(c => c.Filters.Add(new AuthorizeFilter()))
+builder.Services.AddControllers()
      .AddNewtonsoftJson(options =>
      {
          options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
      });
+
+//builder.Services.AddControllers(c => c.Filters.Add(new AuthorizeFilter()))
+//     .AddNewtonsoftJson(options =>
+//     {
+//         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+//     });
 
 builder.Services.AddScoped<CardService>();
 
