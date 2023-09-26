@@ -1,4 +1,6 @@
 ﻿using GotIt_back.Models;
+using GotIt_back.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,20 +10,23 @@ namespace GotIt_back.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class CardsController : ControllerBase
     {
         private readonly DataContext _dataContext;
+        private readonly CardService _cardService;
 
-        public CardsController(DataContext dataContext)
+        public CardsController(DataContext dataContext, CardService cardService)
         {
             _dataContext = dataContext;
+            _cardService = cardService;
         }
 
         // GET: api/<CardsController>
         [HttpGet]
         public async Task<ActionResult<List<Card>>> Get()
         {
-            var cards = await _dataContext.Cards.ToListAsync();
+            var cards = await _cardService.GetAll();
 
             return Ok(cards);
         }

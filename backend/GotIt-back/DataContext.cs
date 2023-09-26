@@ -11,6 +11,7 @@ namespace GotIt_back
         public DbSet<Card> Cards { get; set; }
         public DbSet<Repeat> Repeats { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
