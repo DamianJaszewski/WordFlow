@@ -16,9 +16,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
 
-builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<DataContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+    {
+        options.Password.RequiredLength = 8;
+    })
+   .AddEntityFrameworkStores<DataContext>()
+   .AddDefaultTokenProviders();
 
 //Add Authorize to all Controllers
 builder.Services.AddControllers()
