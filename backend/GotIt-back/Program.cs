@@ -36,7 +36,7 @@ builder.Services.AddControllers()
 //         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 //     });
 
-builder.Services.AddScoped<CardService>();
+builder.Services.AddScoped<ICardService, CardService>();
 
 builder.Services.AddDbContext<DataContext>(options =>
 {

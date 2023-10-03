@@ -14,9 +14,9 @@ namespace GotIt_back.Controllers
     public class CardsController : ControllerBase
     {
         private readonly DataContext _dataContext;
-        private readonly CardService _cardService;
+        private readonly ICardService _cardService;
 
-        public CardsController(DataContext dataContext, CardService cardService)
+        public CardsController(DataContext dataContext, ICardService cardService)
         {
             _dataContext = dataContext;
             _cardService = cardService;

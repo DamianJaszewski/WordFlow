@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GotIt_back.Services
 {
-    public class CardService
+    public class CardService : ICardService
     {
         private readonly DataContext _dataContext;
 
