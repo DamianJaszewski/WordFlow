@@ -3,8 +3,6 @@ using GotIt_back.Models;
 using GotIt_back.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace TestXUnit
 {
@@ -28,7 +26,7 @@ namespace TestXUnit
         }
 
         [Fact]
-        public void GetAll_DemoTest()
+        public async Task Cards_GetAll_ShouldReturnListOfCards()
         {
             // Arrange
             var _contextOptions = new DbContextOptionsBuilder<DataContext>()
@@ -51,14 +49,16 @@ namespace TestXUnit
                 Repeats = new List<Repeat>()
             };
 
-            // Act
             context.Add(card);
             context.SaveChanges();
 
-            var weatherForecasts = context.Cards.ToList();
+            // Act
+
+            var cardService = new CardService(context);
+            var actual = await cardService.GetAll();
 
             // Assert
-            Assert.Equal(1, weatherForecasts.Count());
+            Assert.Single(actual);
 
             //Clean up
             context.Database.EnsureDeleted();
