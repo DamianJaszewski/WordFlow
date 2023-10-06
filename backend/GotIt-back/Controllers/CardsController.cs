@@ -34,35 +34,14 @@ namespace GotIt_back.Controllers
         [HttpGet("Random")]
         public async Task<ActionResult<Card>> GetRandom()
         {
-            var cards = await _dataContext.Cards
-                .Include(x => x.Repeats)
-                .ToListAsync();
-
-            cards = cards.Where(x => !x.Repeats.Any(r => r.NextRepeatTime > DateTime.UtcNow)).ToList();
-
-            cards = cards.OrderBy(c =>
-            {
-                if (c.Repeats == null || c.Repeats.Count == 0)
-                {
-                    //Sort at create date, if there is no Repeats
-                    return c.CreateDate;
-                }
-                else
-                {
-                    //Sort after last Repeat
-                    var lastUpdate = c.Repeats.Max(r => r.LastUpdateTime);
-                    return lastUpdate;
-                }
-            }).ToList();
-
-            var card = cards.FirstOrDefault();
+            var card = await _cardService.GetRandom();
 
             return Ok(card);
         }
 
         // GET api/<CardsController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Card>>> Get(int id)
+        public async Task<ActionResult<List<Card>>> GetById(int id)
         {
             var card = await _dataContext.Cards.FindAsync(id);
 
@@ -75,11 +54,9 @@ namespace GotIt_back.Controllers
         [HttpPost]
         public async Task<ActionResult<List<Card>>> AddCard(Card request)
         {
-            request.CreateDate = DateTime.Now;
-            _dataContext.Cards.Add(request);
-            await _dataContext.SaveChangesAsync();
+            await _cardService.AddCard(request);
 
-            return Ok(await _dataContext.Cards.ToListAsync());
+            return Ok();
         }
 
         // PUT api/<CardsController>/5
@@ -89,12 +66,7 @@ namespace GotIt_back.Controllers
             var card = await _dataContext.Cards.FindAsync(request.Id);
             if (card == null) return BadRequest("Card not found");
 
-            card.Answer = request.Answer;
-            card.Question = request.Question;
-            card.CategoryId = request.CategoryId;
-
-            _dataContext.Update(card);
-            await _dataContext.SaveChangesAsync();
+            await _cardService.UpdateCard(card, request);
 
             return Ok();
         }
@@ -103,16 +75,9 @@ namespace GotIt_back.Controllers
         public async Task<ActionResult<List<Card>>> UpdateRepatOfCard(int id)
         {
             var card = await _cardService.GetCardByIdAsync(id);
-
             if (card == null) return BadRequest("Card not found");
 
-            _cardService.EnsureRepeatsListExists(card);
-
-            var lastRepeat = _cardService.GetLastRepeat(card);
-
-            _cardService.UpdateCardRepeats(card, lastRepeat);
-
-            await _cardService.SaveChangesAsync();
+            await _cardService.UpdateRepatOfCard(card);
 
             return Ok();
         }
@@ -124,8 +89,7 @@ namespace GotIt_back.Controllers
             var card = await _dataContext.Cards.FindAsync(id);
             if (card == null) return BadRequest("Card not found");
 
-            _dataContext.Cards.Remove(card);
-            await _dataContext.SaveChangesAsync();
+            await _cardService.DeleteCard(card);
 
             return Ok();
         }

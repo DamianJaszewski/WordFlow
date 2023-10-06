@@ -4,11 +4,12 @@ namespace GotIt_back.Services
 {
     public interface ICardService
     {
-        void EnsureRepeatsListExists(Card card);
         Task<List<Card>> GetAll();
         Task<Card> GetCardByIdAsync(int id);
-        Repeat GetLastRepeat(Card card);
         Task SaveChangesAsync();
-        void UpdateCardRepeats(Card card, Repeat lastRepeat);
+        Task<Card> UpdateRepatOfCard(Card card);
+        Task<Card> GetRandom();
+        Task AddCard(Card request);
+        Task UpdateCard(Card card, Card request);
     }
 }

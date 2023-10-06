@@ -17,6 +17,17 @@ namespace GotIt_back.Services
             return await _dataContext.Cards.ToListAsync();
         }
 
+        public async Task<Card> GetRandom()
+        {
+            var cards = await GetCardsWithRepeats();
+
+            cards = FilterCardsByNextRepetTime(cards);
+
+            cards = OrderCardsByRepeats(cards);
+
+            return cards.FirstOrDefault();
+        }
+
         public async Task<Card> GetCardByIdAsync(int id)
         {
             return await _dataContext.Cards
@@ -24,7 +35,42 @@ namespace GotIt_back.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void EnsureRepeatsListExists(Card card)
+        public async Task AddCard(Card request)
+        {
+            request.CreateDate = DateTime.Now;
+            _dataContext.Cards.Add(request);
+            await SaveChangesAsync();
+        }
+
+        public async Task UpdateCard(Card card, Card request)
+        {
+            card.Answer = request.Answer;
+            card.Question = request.Question;
+            card.CategoryId = request.CategoryId;
+
+            _dataContext.Update(card);
+            await SaveChangesAsync();
+        }
+
+        public async Task<Card> UpdateRepatOfCard(Card card)
+        {
+            EnsureRepeatsListExists(card);
+            var lastRepeat = GetLastRepeat(card);
+            UpdateCardRepeats(card, lastRepeat);
+
+            await SaveChangesAsync();
+            return card;
+        }
+
+        public async Task DeleteCard(Card card)
+        {
+            _dataContext.Cards.Remove(card);
+            await SaveChangesAsync();
+        }
+
+        #region private 
+
+        private void EnsureRepeatsListExists(Card card)
         {
             if (card.Repeats == null)
             {
@@ -32,12 +78,12 @@ namespace GotIt_back.Services
             }
         }
 
-        public Repeat GetLastRepeat(Card card)
+        private Repeat GetLastRepeat(Card card)
         {
             return card.Repeats.OrderBy(x => x.Id).FirstOrDefault();
         }
 
-        public void UpdateCardRepeats(Card card, Repeat lastRepeat)
+        private void UpdateCardRepeats(Card card, Repeat lastRepeat)
         {
             int[] repetitionList = { 1, 7, 30, 180, 360 };
             int repetitionDays = lastRepeat?.RepetLevel ?? 0;
@@ -56,5 +102,36 @@ namespace GotIt_back.Services
         {
             await _dataContext.SaveChangesAsync();
         }
+
+        private async Task<List<Card>> GetCardsWithRepeats()
+        {
+            return await _dataContext.Cards
+           .Include(x => x.Repeats)
+           .ToListAsync();
+        }
+
+        private List<Card> FilterCardsByNextRepetTime(List<Card> cards )
+        {
+            return cards.Where(x => !x.Repeats.Any(r => r.NextRepeatTime > DateTime.UtcNow)).ToList();
+        }
+
+        private List<Card> OrderCardsByRepeats(List<Card> cards)
+        {
+            return cards.OrderBy(c =>
+            {
+                if (c.Repeats == null || c.Repeats.Count == 0)
+                {
+                    //Sort at create date, if there is no Repeats
+                    return c.CreateDate;
+                }
+                else
+                {
+                    //Sort after last Repeat
+                    var lastUpdate = c.Repeats.Max(r => r.LastUpdateTime);
+                    return lastUpdate;
+                }
+            }).ToList();
+        }
+        #endregion
     }
 }
