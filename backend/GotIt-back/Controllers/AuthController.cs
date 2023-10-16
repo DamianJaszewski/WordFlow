@@ -25,7 +25,9 @@ namespace GotIt_back.Controllers
             }
             if (await _authService.Login(user))
             {
-                return Ok("Login");
+                //JWTBearer
+                var tokenString = _authService.GenerateTokenString(user);
+                return Ok(tokenString);
             }
             return BadRequest();
         }

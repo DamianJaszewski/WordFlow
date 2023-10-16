@@ -2,9 +2,12 @@
 using GotIt_back.Models;
 using GotIt_back.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 // Add allow CORS
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -22,6 +25,28 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     })
    .AddEntityFrameworkStores<DataContext>()
    .AddDefaultTokenProviders();
+
+//Add authenticatoin with JwtBearer
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(optins =>
+{
+    optins.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateActor = true,
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        RequireExpirationTime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration.GetSection("Jwt:Issuer").Value,
+        ValidAudience = builder.Configuration.GetSection("Jwt:Audience").Value,
+        IssuerSigningKey= new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt:Issuer").Value)
+            )
+    };
+});
 
 //Add Authorize to all Controllers
 builder.Services.AddControllers()

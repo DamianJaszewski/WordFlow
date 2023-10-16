@@ -10,7 +10,7 @@ namespace GotIt_back.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class CardsController : ControllerBase
     {
         private readonly DataContext _dataContext;

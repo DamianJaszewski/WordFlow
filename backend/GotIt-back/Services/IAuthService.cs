@@ -6,5 +6,6 @@ namespace GotIt_back.Services
     {
         Task<bool> RegisterUser(User user);
         Task<bool> Login(User user);
+        string GenerateTokenString(User user);
     }
 }
