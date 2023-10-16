@@ -11,5 +11,6 @@ namespace GotIt_back.Services
         Task<Card> GetRandom();
         Task AddCard(Card request);
         Task UpdateCard(Card card, Card request);
+        Task DeleteCard(Card card);
     }
 }
