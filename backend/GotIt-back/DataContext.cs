@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GotIt_back
 {
-    public class DataContext : IdentityDbContext
+    public class DataContext : IdentityDbContext<MyUser>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 

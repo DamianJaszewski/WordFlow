@@ -2,7 +2,6 @@
 using GotIt_back.Models;
 using GotIt_back.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -15,38 +14,6 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie();
-
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
-    {
-        options.Password.RequiredLength = 8;
-    })
-   .AddEntityFrameworkStores<DataContext>()
-   .AddDefaultTokenProviders();
-
-//Add authenticatoin with JwtBearer
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(optins =>
-{
-    optins.TokenValidationParameters = new TokenValidationParameters()
-    {
-        ValidateActor = true,
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        RequireExpirationTime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration.GetSection("Jwt:Issuer").Value,
-        ValidAudience = builder.Configuration.GetSection("Jwt:Audience").Value,
-        IssuerSigningKey= new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt:Issuer").Value)
-            )
-    };
-});
 
 //Add Authorize to all Controllers
 builder.Services.AddControllers()
@@ -61,12 +28,19 @@ builder.Services.AddControllers()
 //         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 //     });
 
+
+builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
+builder.Services.AddAuthorizationBuilder();
+
+builder.Services.AddIdentityCore<MyUser>()
+    .AddEntityFrameworkStores<DataContext>()
+    .AddApiEndpoints();
+
 builder.Services.AddScoped<ICardService, CardService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BasicConnection"));
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -85,6 +59,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+app.MapIdentityApi<MyUser>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
