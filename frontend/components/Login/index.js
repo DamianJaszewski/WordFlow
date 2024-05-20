@@ -1,42 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View,TextInput, Pressable , FlatList, TouchableOpacity} from 'react-native';
-import CardsService from '../../services/auth.service';
-import CategoryService from '../../services/auth.service';
-import styles from '../../style';
+import AuthService from '../../services/auth.service';
+import appStyles from '../../style';
 
 function Login(){
 
+  const [login, setLogin] = useState({email: "" , password: ""});
+
+  const loginUer = async() => {
+    try{
+      await AuthService.login(login)
+      setLogin({ email: "", password: "" })
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
   return (
-    <View style={styles.container}>
-      <div style = {styles.card}>
-        <Text style={styles.categoryName}>Login</Text>
+    <View style={appStyles.container}>
+      <div style = {appStyles.card}>
+        <Text style={appStyles.categoryName}>Login</Text>
         
       </div>
-      <div style = {styles.card}>
+      <div style = {appStyles.card}>
         <TextInput
-          style={{
-            borderBottomWidth: 1,
-            borderBottomColor: '#ccc',
-            marginBottom: 10,
-          }}
-          placeholder="Kategoria"
-        />
-        <TextInput
-          style = {styles.inputText}
-          placeholder="Pytanie"
+          style = {appStyles.inputText}
+          placeholder="Email"
+          value={login.email}
+          onChangeText={text => setLogin({ ...login, email: text })}
         />
         <hr className="rounded"></hr>
         <TextInput
-          style = {styles.inputText}
-          placeholder="Odpowiedź"
+          style = {appStyles.inputText}
+          placeholder="Password"
+          value={login.password}
+          onChangeText={text => setLogin({ ...login, password: text })}
         />
-        <Pressable style = {styles.myButton} >
-          <Text style={styles.text}>{"Dodaj"}</Text>
+        <Pressable style = {appStyles.myButton} onPress={loginUer}>
+          <Text style={appStyles.text}>{"Login"}</Text>
         </Pressable>
-        <Pressable title="Edytuj" style = {styles.myButton} ><Text style={styles.text}>{"Edytuj"}</Text></Pressable>
-        <Pressable title="Usuń" style = {styles.myButton} ><Text style={styles.text}>{"Usuń"}</Text></Pressable>
-        <StatusBar style="auto" />
+        <Pressable title="RememberPassword" style = {appStyles.myButton}>
+          <Text style={appStyles.text}>{"Remember Password"}</Text>
+        </Pressable>
       </div>
     </View>
   );

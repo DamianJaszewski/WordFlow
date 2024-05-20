@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const appStyles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#',
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
       boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
     },
     card: {
-      width: 492,
+      width: '30%',
       height: 'auto',
       flexShrink: 0,
       borderRadius: 20,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     },
     categoryName: {
       display: 'flex',
-      width: 266,
+      width: 'auto',
       height: 40,
       flexDirection: 'column',
       justifyContent: 'center',
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
     },
   });
 
-  export default styles;
+  export default appStyles;

@@ -3,7 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View,TextInput, Pressable , FlatList, TouchableOpacity} from 'react-native';
 import CardsService from '../../services/card.service';
 import CategoryService from '../../services/category.service';
-import styles from '../../style';
+import appStyles from '../../style';
+import GetImage from '../GetImage';
 
 function Card(){
 
@@ -119,27 +120,27 @@ const createCategory = async() => {
 
 
   return (
-    <View style={styles.container}>
-      <div style = {styles.card}>
-        <Text style={styles.categoryName}>{categoryName}</Text>
+    <View style={appStyles.container}>
+      <div style = {appStyles.card}>
+        <Text style={appStyles.categoryName}>{categoryName}</Text>
         {nextCard && 
          <>
-            <div><Text style={styles.cardText}>{nextCard.question}</Text></div>
+            <div><Text style={appStyles.cardText}>{nextCard.question}</Text></div>
             {(showAnswer === true) ?
             <>
               <hr className="rounded"></hr>
-              <div><Text style={styles.cardText}>{nextCard.answer}</Text></div>
-              <Pressable title="Next" style = {styles.myButton} onPress = {getNextCard}>
-                <Text style={styles.text}>{"Next"}</Text>
+              <div><Text style={appStyles.cardText}>{nextCard.answer}</Text></div>
+              <Pressable title="Next" style = {appStyles.myButton} onPress = {getNextCard}>
+                <Text style={appStyles.text}>{"Next"}</Text>
               </Pressable>
             </>
-            : <Pressable title="Check" style = {styles.myButton} onPress={checkAnswer}>
-                <Text style={styles.text}>{"Check"}</Text>
+            : <Pressable title="Check" style = {appStyles.myButton} onPress={checkAnswer}>
+                <Text style={appStyles.text}>{"Check"}</Text>
               </Pressable>}
          </>
         }
       </div>
-      <div style = {styles.card}>
+      <div style = {appStyles.card}>
         {/* <TextInput
           placeholder="Dodaj kategorię"
           value={newCategory.name}
@@ -188,23 +189,24 @@ const createCategory = async() => {
         </Picker> */}
 
         <TextInput
-          style = {styles.inputText}
+          style = {appStyles.inputText}
           placeholder="Pytanie"
           value={newCard.question}
           onChangeText={text => setNewCard({ ...newCard, question: text })}
         />
         <hr className="rounded"></hr>
         <TextInput
-          style = {styles.inputText}
+          style = {appStyles.inputText}
           placeholder="Odpowiedź"
           value={newCard.answer}
           onChangeText={text => setNewCard({ ...newCard, answer: text })}
         />
-        <Pressable style = {styles.myButton} onPress={createCard}>
-          <Text style={styles.text}>{"Dodaj"}</Text>
+        <Pressable style = {appStyles.myButton} onPress={createCard}>
+          <Text style={appStyles.text}>{"Dodaj"}</Text>
         </Pressable>
-        <Pressable title="Edytuj" style = {styles.myButton} onPress={editCard}><Text style={styles.text}>{"Edytuj"}</Text></Pressable>
-        <Pressable title="Usuń" style = {styles.myButton} onPress={deleteCard}><Text style={styles.text}>{"Usuń"}</Text></Pressable>
+        <Pressable title="Edytuj" style = {appStyles.myButton} onPress={editCard}><Text style={appStyles.text}>{"Edytuj"}</Text></Pressable>
+        <Pressable title="Usuń" style = {appStyles.myButton} onPress={deleteCard}><Text style={appStyles.text}>{"Usuń"}</Text></Pressable>
+        {/* <GetImage/> */}
         <StatusBar style="auto" />
       </div>
       {/* <Text>Lista kart</Text>

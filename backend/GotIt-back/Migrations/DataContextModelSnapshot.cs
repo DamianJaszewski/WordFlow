@@ -47,9 +47,14 @@ namespace GotIt_back.Migrations
                     b.Property<bool>("Remembered")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Cards");
                 });
@@ -305,7 +310,13 @@ namespace GotIt_back.Migrations
                         .WithMany("Cards")
                         .HasForeignKey("CategoryId");
 
+                    b.HasOne("GotIt_back.Models.MyUser", "User")
+                        .WithMany("Cards")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Category");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GotIt_back.Models.Repeat", b =>
@@ -376,6 +387,11 @@ namespace GotIt_back.Migrations
                 });
 
             modelBuilder.Entity("GotIt_back.Models.Category", b =>
+                {
+                    b.Navigation("Cards");
+                });
+
+            modelBuilder.Entity("GotIt_back.Models.MyUser", b =>
                 {
                     b.Navigation("Cards");
                 });

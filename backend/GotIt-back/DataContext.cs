@@ -12,6 +12,7 @@ namespace GotIt_back
         public DbSet<Card> Cards { get; set; }
         public DbSet<Repeat> Repeats { get; set; }
         public DbSet<Category> Category { get; set; }
+
         //public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,6 +28,11 @@ namespace GotIt_back
                 .HasMany(cat => cat.Cards)
                 .WithOne(c => c.Category)
                 .HasForeignKey(c => c.CategoryId);
+
+            modelBuilder.Entity<Card>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.Cards)
+                .HasForeignKey(c => c.UserId);
         }
     }
 }

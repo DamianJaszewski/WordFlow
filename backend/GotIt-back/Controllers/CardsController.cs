@@ -1,6 +1,7 @@
 ﻿using GotIt_back.Models;
 using GotIt_back.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,11 +16,13 @@ namespace GotIt_back.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly ICardService _cardService;
+        private readonly UserManager<MyUser> _userManager;
 
-        public CardsController(DataContext dataContext, ICardService cardService)
+        public CardsController(DataContext dataContext, ICardService cardService, UserManager<MyUser> userManager)
         {
             _dataContext = dataContext;
             _cardService = cardService;
+            _userManager = userManager;
         }
 
         // GET: api/<CardsController>
@@ -54,6 +57,8 @@ namespace GotIt_back.Controllers
         [HttpPost]
         public async Task<ActionResult<List<Card>>> AddCard(Card request)
         {
+            var userId = _userManager.GetUserId(User);
+            request.UserId = userId;
             await _cardService.AddCard(request);
 
             return Ok();

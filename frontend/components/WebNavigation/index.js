@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import styles from './style';
 
 // const TabBottom = createBottomTabNavigator();
 const TabTop = createMaterialTopTabNavigator();
@@ -11,6 +12,7 @@ const Stack = createNativeStackNavigator();
 
 import Card from './../Card';
 import Login from './../Login';
+import Register from './../Register';
 
 function CustomHeader() {
     const navigation = useNavigation();
@@ -21,19 +23,23 @@ function CustomHeader() {
 
     return (
         <View style={styles.header}>
-        {/* Logo */}
-        {/* <Image source={logo} style={styles.logo} /> */}
-        {/* Navigation links */}
-        <Text style={styles.link} onPress={() => handleLinkPress('Home')}>
-          Home
-        </Text>
-        <Text style={styles.link} onPress={() => handleLinkPress('Login')}>
-          Login
-        </Text>
-        {/* <Text style={styles.link} onPress={() => handleLinkPress('Services')}>
-          Register
-        </Text> */}
-      </View>
+            <View style={styles.logoColumn}>
+            {/* Logo */}
+            {/* <Image source={logo} style={styles.logo} /> */}
+            </View>
+            <View style={styles.column}>
+                {/* Second link */}
+                <Text style={styles.link} onPress={() => handleLinkPress('Home')}>
+                    Home
+                </Text>
+                <Text style={styles.link} onPress={() => handleLinkPress('Login')}>
+                    Login
+                </Text>
+                <Text style={styles.link} onPress={() => handleLinkPress('Register')}>
+                    Register
+                </Text>
+            </View>
+        </View>
     );
   }
 
@@ -43,27 +49,10 @@ function WebNavigation(){
         <Stack.Navigator screenOptions={{ header: (props) => <CustomHeader {...props} /> }}>
             <Stack.Screen name="Home" component={Card} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-    header: {
-      flexDirection: 'row',
-      alignItems: 'right',
-      padding: 16,
-      backgroundColor: '#333', // Background color for the header
-    },
-    logo: {
-      width: 100,
-      height: 40,
-      marginRight: 'auto', // Push the logo to the right side
-    },
-    link: {
-      color: 'white',
-      marginLeft: 16,
-    },
-  });
 
 export default WebNavigation

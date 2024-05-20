@@ -1,11 +1,11 @@
 import http from "../http-common";
 
 const getAll = () =>{
-    return http.get("/Cards");
+    return http.get("api/Cards");
 };
 
 const create = data => {
-    http.post("/Cards", {
+    http.post("api/Cards", {
         "id": 0,
         "createDate": null,
         "question":  data.question,
@@ -16,11 +16,11 @@ const create = data => {
 };
 
 const get = id => {
-    return http.get(`/Cards/${id}`);
+    return http.get(`api/Cards/${id}`);
 };
 
 const getNext = () => {
-    return http.get(`/Cards/Random/`);
+    return http.get(`api/Cards/Random/`);
 };
 
 const update = (data) => {
@@ -33,11 +33,11 @@ const update = (data) => {
 };
 
 const addRepeatInfo = (id) => {
-    return http.put(`/Cards/Repeat/${id}`);
+    return http.put(`api/Cards/Repeat/${id}`);
 };
 
 const remove = id => {
-return http.delete(`/Cards/${id}`);
+return http.delete(`api/Cards/${id}`);
 };
 
 const CardsService = {
