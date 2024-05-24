@@ -24,7 +24,8 @@ Used packages:
 ## API Endpoints
 
 **Authorizarion**
-Dostęp do enpointów wymaga logowania, dostęp za pomocą autryrzaji bearer token
+Access to endpoints requires logging in. Use Bearer token authentication for access. <br>
+All API requests must include the Bearer token in the `Authorization` header:
 
 ```
 Authorization: Bearer <your-token>
@@ -34,4 +35,4 @@ Authorization: Bearer <your-token>
 
 <img src="./images/CardsApi2.png" alt="drawing" width="700" />
 
-See source of tables <a href="https://gabby-collar-b50.notion.site/WordFlow-Anki-App-API-06b837024e774443bb84a24c1cdad81b?pvs=4" target="_blank">Endpoints</a>
+See source of tables [Cards Endpoints](https://gabby-collar-b50.notion.site/WordFlow-Anki-App-API-06b837024e774443bb84a24c1cdad81b?pvs=4")
