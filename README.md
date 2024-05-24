@@ -7,6 +7,7 @@ The following technologies were used to create the application: <br>
 ## Table of Contents
 * [General Information](#General-Information)
 * [Technologies](#Technologies)
+* [API Endpoints](#API-Endpoints)
 * [Code Example](#Code-Example)
 
 ## Technologies
@@ -19,3 +20,16 @@ Used packages:
 * Microsoft.EntityFrameworkCore.Tools 
 * Microsoft.EntityFrameworkCore.Design
 * Microsoft.EntityFrameworkCore.SqlServer
+
+## API Endpoints
+
+**Authorizarion**
+Dostęp do enpointów wymaga logowania, dostęp za pomocą autryrzaji bearer token
+
+```
+Authorization: Bearer <your-token>
+```
+
+**Endpoints**
+
+See source of tables [Endpoints](https://gabby-collar-b50.notion.site/WordFlow-Anki-App-API-06b837024e774443bb84a24c1cdad81b?pvs=4).
