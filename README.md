@@ -32,6 +32,6 @@ Authorization: Bearer <your-token>
 
 **Endpoints**
 
-![Pobranie danych](./images/CardsApi2.png)
+<img src="./images/CardsApi2.png" alt="drawing" width="700" />
 
 See source of tables [Endpoints](https://gabby-collar-b50.notion.site/WordFlow-Anki-App-API-06b837024e774443bb84a24c1cdad81b?pvs=4).
