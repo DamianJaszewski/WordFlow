@@ -1,11 +1,13 @@
-﻿using System.Net;
+﻿
+using Microsoft.AspNetCore.Identity.UI.Services;
+using System.Net;
 using System.Net.Mail;
 
-namespace GotIt_back.Helpers
+namespace GotIt_back.Services
 {
-    public class MailSender
+    public class EmailSender : IEmailSender
     {
-        public static void SendMail(string emailTo, string subject, string message)
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
@@ -18,9 +20,9 @@ namespace GotIt_back.Helpers
             // Utworzenie wiadomości e-mail
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress(emailFrom);
-            mail.To.Add(emailTo);
+            mail.To.Add(email);
             mail.Subject = subject;
-            mail.Body = message;
+            mail.Body = htmlMessage;
 
             // Konfiguracja klienta SMTP
             SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort);
