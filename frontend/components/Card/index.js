@@ -5,6 +5,7 @@ import CardsService from '../../services/card.service';
 import CategoryService from '../../services/category.service';
 import appStyles from '../../style';
 import GetImage from '../GetImage';
+import { useRoute } from "@react-navigation/native";
 
 function Card(){
 
@@ -20,12 +21,14 @@ const [categories, setCategories] = useState([]);
 const [newCategory, setNewCategory] = useState({name: ''});
 const [selectedCatValue, setSelectedCatValue] = useState("Category..");
 const [categoryName, setCategoryName] = useState();
+const route = useRoute();
+const { refresh } = route.params || {}; // Odczytanie parametru "refresh"
 
 
 useEffect(() => {
   fetchData();
   getNextCard();
-}, []);
+}, [refresh]);
 
 const fetchData = async () => {
   try {

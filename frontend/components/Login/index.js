@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View,TextInput, Pressable , FlatList, TouchableOpacity} from 'react-native';
 import AuthService from '../../services/auth.service';
 import appStyles from '../../style';
+import { useNavigation } from '@react-navigation/native';
 
 function Login(){
 
@@ -12,10 +13,18 @@ function Login(){
     try{
       await AuthService.login(login)
       setLogin({ email: "", password: "" })
+      handleLinkPress('Home')
     } catch (error) {
       setError(error.message);
     }
   }
+
+  const navigation = useNavigation();
+  
+  const handleLinkPress = (screenName) => {
+      navigation.navigate(screenName, {refresh: true});
+    };
+  
 
   return (
     <View style={appStyles.container}>
